@@ -4,6 +4,7 @@ import React, {
   useMemo,
   useReducer,
   useState,
+  TouchEvent,
 } from 'react';
 import { useParams } from 'react-router-dom';
 import { last, map, shuffle, uniqueId } from 'lodash-es';
@@ -18,6 +19,14 @@ type Action =
   | { type: 'removeLetter'; letter: Letter }
   | { type: 'reorderWords'; words: Word[] }
   | { type: 'shuffle' };
+
+const touchTap = (e: TouchEvent<HTMLButtonElement>) => {
+  const { target } = e;
+  if (target instanceof HTMLElement) {
+    target.click();
+    e.preventDefault();
+  }
+};
 
 const Anagrams: React.FC = () => {
   const { word: source } = useParams<{ word: string }>();
@@ -132,7 +141,10 @@ const Anagrams: React.FC = () => {
                   {l.letter}
                 </motion.span>
               ))}
-              <button onClick={() => dispatch({ type: 'removeWord', word: w })}>
+              <button
+                onClick={() => dispatch({ type: 'removeWord', word: w })}
+                onTouchStart={touchTap}
+              >
                 &times;
               </button>
             </Reorder.Item>
@@ -149,6 +161,7 @@ const Anagrams: React.FC = () => {
                   className="letter"
                   key={letter.id}
                   onClick={() => dispatch({ type: 'removeLetter', letter })}
+                  onTouchStart={touchTap}
                 >
                   {letter.letter}
                 </motion.button>
@@ -158,6 +171,7 @@ const Anagrams: React.FC = () => {
                 layoutId="return"
                 className="return"
                 onClick={() => dispatch({ type: 'addWord', word })}
+                onTouchStart={touchTap}
               >
                 ⏎
               </motion.button>
@@ -184,6 +198,7 @@ const Anagrams: React.FC = () => {
               className="letter"
               key={letter.id}
               onClick={() => dispatch({ type: 'addLetter', letter })}
+              onTouchStart={touchTap}
             >
               {letter.letter}
             </motion.button>
@@ -198,6 +213,7 @@ const Anagrams: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => dispatch({ type: 'shuffle' })}
+            onTouchStart={touchTap}
           >
             Scramble
           </motion.button>
