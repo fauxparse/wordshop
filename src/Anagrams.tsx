@@ -74,6 +74,7 @@ const Anagrams: React.FC = () => {
     () => ({
       letters: source!
         .toUpperCase()
+        .replace(/\W+/g, '')
         .split('')
         .map((letter) => ({ id: uniqueId(), letter })),
       words: [],
