@@ -83,7 +83,10 @@ const Anagrams: React.FC = () => {
 
   useEffect(() => {
     const keyPress = (e: KeyboardEvent) => {
-      if (e.key === 'Enter' && !(e.target as HTMLElement)?.closest('button')) {
+      if (
+        (e.key === 'Enter' || e.key === 'Space') &&
+        !(e.target as HTMLElement)?.closest('button')
+      ) {
         if (word.letters.length > 0) {
           dispatch({ type: 'addWord', word });
         }
