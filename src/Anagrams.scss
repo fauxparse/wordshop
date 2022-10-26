@@ -1,0 +1,94 @@
+@use "open-color/open-color.scss" as *;
+
+.anagrams {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.current-word {
+  display: flex;
+  gap: 0.5rem;
+
+  button {
+    &:last-child {
+      border: 0;
+      font-size: 2rem;
+      line-height: 1;
+      padding: 0.5rem 0 1rem;
+      width: 3.5rem;
+      color: $oc-gray-6;
+    }
+  }
+
+  &__placeholder {
+    color: $oc-gray-6;
+    font-size: 2rem;
+    line-height: 1;
+    padding: 0.5rem 0 1rem;
+  }
+}
+
+.letters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 44rem;
+}
+
+.letter {
+  border: 0;
+  background-color: $oc-yellow-5;
+  color: $oc-yellow-9;
+  font-weight: bold;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0.5rem 0 1rem;
+  width: 3.5rem;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.5rem $oc-yellow-8;
+  }
+}
+
+.scramble {
+  background: $oc-red-5;
+  color: $oc-red-1;
+  padding: 0.5rem 1rem 1rem;
+}
+
+.words {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 44rem;
+}
+
+.word {
+  font-size: 2rem;
+  line-height: 1;
+  background: $oc-yellow-3;
+  color: $oc-yellow-9;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  padding: 0 0 0 1rem;
+  cursor: grab;
+
+  button {
+    background: none;
+    margin-left: 0.5rem;
+    color: inherit;
+    opacity: 0.5;
+    border: 0;
+
+    &:hover,
+    &:focus,
+    &:active {
+      opacity: 1;
+      box-shadow: none;
+    }
+  }
+}
